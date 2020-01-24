@@ -1,8 +1,12 @@
 //Desectructuración
-const { Cliente, Articulo } = require('./models.js');
+//const { Cliente, Articulo } = require('./models.js');
 // ./ porque no es un modulo de nodes
+// llaves desestructuración
+//Al usar controlador ya no necesita el modelo
 
 const express = require('express');
+const controller = require('./controllers.js');
+
 
 //router se crea con express, y para ello hay que importarla
 const router = express.Router();
@@ -11,50 +15,25 @@ const router = express.Router();
 //Métodos de http
 
 //Read All
-router.get('/clientes', (req, res) => {
-    Cliente.find({}, (err, data) => {
-        if (err) res.json({ error: err });
-        else res.json(data);
-    });
-});
+router.get('/clientes', controller.listarClientes);
+//Se mandan los datos en formato json no las vistas como en Symfony por ejemplo
 
 //Read
-router.get('/clientes/:id', (req, res) => {
-    Cliente.findOne({ _id: req.param.id }, (err, data) => {
-        if (err) res.json({ error: err });
-        else res.json(data);
-    });
-});
+router.get('/clientes/:id', controller.readCliente);
+//_id: campo de la colección(dentro de la colección Cliente, se creaba solo como _id), id: el parámetro de la dirección(nombre de la variable) 
 
 //parametros son los que aparecen en la url con :
 
 //Delete
-router.delete('/clientes/:id', (req, res) => {
-    Cliente.findOneAndRemove({ _id: req.param.id }, (err, data) => {
-        if (err) res.json({ error: err });
-        else res.json(data);
-    });
-});
+router.delete('/clientes/:id', controller.deleteCliente);
+//Delete: porque es un método http, es obligatorio
+
 
 //Update
-router.put('/clientes/:id', (req, res) => {
-    Cliente.findOneAndUpdate(
-        { _id: req.param.id },
-        { $set: { nombre: req.body.nombre, apellidos:req.body.apellidos } }, 
-        (err, data) => {
-            if (err) res.json({ error: err });
-            else res.json(data);
-        });
-});
+router.put('/clientes/:id', controller.updateCliente);
+//Put: porque es un método http, es obligatorio que se llame así
 
 //Create
-router.post('/clientes/', (req, res) => {
-    const cliente = new Cliente({nombre: req.body.nombre, apellidos: req.body.apellidos});
-
-    cliente.save((err, data) => {
-        if (err) res.json({ error: err });
-        else res.json(data);
-    });
-});
+router.post('/clientes/', controller.createCliente);
 
 module.exports= router;
