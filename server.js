@@ -11,11 +11,11 @@ mongoose.connect("mongodb+srv://usuario:usuario@cluster0-dntkw.mongodb.net/tiend
    .then( db => console.log("Conexión a BD correcta") )
    .catch(err => console.log("Error al conectarse a BD: " + err));
 
+
 //conectar con una base de datos en la nube
 //MIDDLEWARE: añadir un enrutador que se encardarán de todas las direcciones que vengan de /api/
 
-app.use(express.json()); 
-
+app.use(express.json());    // IMPORTANTE: Poner esto antes de las rutas
 app.use('/api', apiRoutes);
 
 
