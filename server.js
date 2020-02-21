@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const apiRoutes = require('./routes.js');
@@ -7,7 +9,7 @@ const apiRoutes = require('./routes.js');
 const app = express();
 
 //conectar con una base de datos local
-mongoose.connect("mongodb+srv://usuario:usuario@cluster0-dntkw.mongodb.net/tienda?retryWrites=true&w=majority", { useNewUrlParser: true })
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true })
    .then( db => console.log("Conexión a BD correcta") )
    .catch(err => console.log("Error al conectarse a BD: " + err));
 
