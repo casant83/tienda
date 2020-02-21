@@ -42,7 +42,7 @@ exports.createCliente = (req, res) => {
     });
 }
 
-exports.listarProducto = (req, res) => {
+exports.listarProductos = (req, res) => {
     Producto.find({}, (err, data) => {
         if (err) res.json({ error: err });
         else res.json(data);
@@ -66,7 +66,7 @@ exports.deleteProducto = (req, res) => {
 exports.updateProducto = (req, res) => {
     Producto.findOneAndUpdate(
         { _id: req.param.id },
-        { $set: { nombre: req.body.nombre, apellidos:req.body.apellidos } }, 
+        { $set: { nombre: req.body.nombre, precio:req.body.precio, cantidad:req.body.cantidad, codigoProducto:req.body.codigoProducto } }, 
         (err, data) => {
             if (err) res.json({ error: err });
             else res.json(data);
@@ -74,7 +74,7 @@ exports.updateProducto = (req, res) => {
 }
 
 exports.createProducto = (req, res) => {
-    const producto = new Producto({nombre: req.body.nombre, apellidos: req.body.apellidos});
+    const producto = new Producto({nombre: req.body.nombre, precio:req.body.precio, cantidad:req.body.cantidad, codigoProducto:req.body.codigoProducto});
 
     producto.save((err, data) => {
         if (err) res.json({ error: err });
