@@ -1,4 +1,4 @@
-require('dotenv').config();
+/* require('dotenv').config();
 
 const path =require('path');
 const cors = require('cors');
@@ -44,4 +44,5 @@ app.get("/hola", (req, res) => {
 //Tambiñén vamos a cambiar el puerto
 //app.listen(3000, ()=> console.log("Servidor iniciado..."));
 //3000 está bien para trabajar en local, pero para trabajar con heroku:
-app.listen(PORT, ()=> console.log("Servidor iniciado..."));
+/*app.listen(PORT, ()=> console.log("Servidor iniciado..."));
+ */
